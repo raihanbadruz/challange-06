@@ -29,11 +29,7 @@ export const registerLoginWithGoogle =
       // We will use navigate from react-router-dom by passing the argument because the useNavigate() can only used in component
       window.location.href = "/";
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.response.data.message);
-        return;
-      }
-      toast.error(error.message);
+      console.error("Error:", error);
     }
   };
 
@@ -106,11 +102,7 @@ export const login = (data, navigate) => async (dispatch) => {
 
     navigate("/");
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      toast.error(error.response.data.message);
-      return;
-    }
-    toast.error(error.message);
+    console.error("Error:", error);
   }
 };
 
@@ -134,10 +126,6 @@ export const register = (data, navigate) => async (dispatch) => {
 
     navigate("/");
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      toast.error(error.response.data.message);
-      return;
-    }
-    toast.error(error.message);
+    console.error("Error:", error);
   }
 };
