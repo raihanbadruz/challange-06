@@ -2,36 +2,35 @@ import { setIsLoggedIn, setToken, setUser } from "../reducers/authReducers";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const registerLoginWithGoogle =
-  (accessToken, navigate) => async (dispatch) => {
-    try {
-      let data = JSON.stringify({
-        access_token: accessToken,
-      });
+export const registerLoginWithGoogle = (accessToken) => async (dispatch) => {
+  try {
+    let data = JSON.stringify({
+      access_token: accessToken,
+    });
 
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: `${import.meta.env.VITE_API}auth/google`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `${import.meta.env.VITE_API}auth/google`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
 
-      const response = await axios.request(config);
-      const { token } = response.data.data;
+    const response = await axios.request(config);
+    const { token } = response.data.data;
 
-      dispatch(setToken(token));
-      dispatch(setIsLoggedIn(true));
-      dispatch(getMe(null, null, null));
+    dispatch(setToken(token));
+    dispatch(setIsLoggedIn(true));
+    dispatch(getMe(null, null, null));
 
-      // We will use navigate from react-router-dom by passing the argument because the useNavigate() can only used in component
-      window.location.href = "/";
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+    // We will use navigate from react-router-dom by passing the argument because the useNavigate() can only used in component
+    window.location.href = "/";
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 export const logout = (navigate) => (dispatch) => {
   try {
@@ -126,6 +125,6 @@ export const register = (data, navigate) => async (dispatch) => {
 
     navigate("/");
   } catch (error) {
-    console.error("Error:", error);
+    console.log("Password Must Be Stronger!!!");
   }
 };
