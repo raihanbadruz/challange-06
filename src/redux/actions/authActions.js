@@ -125,6 +125,6 @@ export const register = (data, navigate) => async (dispatch) => {
 
     navigate("/");
   } catch (error) {
-    console.log("Password Must Be Stronger!!!");
+    console.error("Error:", error);
   }
 };
